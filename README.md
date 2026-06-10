@@ -9,10 +9,9 @@
 
 ## Domain
 
-<!-- What topic or category of knowledge does your system cover?
-     Why is this knowledge valuable, and why is it hard to find through official channels?
-     Example: "Student reviews of CS professors at [university] — useful because official
-     course descriptions don't reflect teaching style, exam difficulty, or workload." -->
+**UC San Diego off-campus housing experiences.** The system makes searchable the unofficial, experience-based knowledge of what it's actually like to rent off-campus as a UCSD student — specific apartment complexes and neighborhoods (La Jolla, University City/UTC, Mira Mesa, Clairemont) covering rent, commute and parking, noise, maintenance, safety, and unit crowding.
+
+This is hard to find through official channels because UCSD housing resources and apartment-listing sites advertise amenities and asking rents but don't reveal the candid tradeoffs — that Costa Verde Village has recurring roach and thin-wall complaints, that Regents La Jolla units routinely pack 4–8 people, or how the real parking and commute situation feels. Those details live only in scattered resident reviews and student discussion that no single official channel aggregates, so it's the kind of word-of-mouth knowledge a sophomore moving off-campus or an incoming transfer otherwise has to piece together by hand.
 
 ---
 
@@ -22,18 +21,24 @@
      Be specific: include URLs, subreddit names, forum thread titles, or file names.
      Aim for variety — sources that together cover different subtopics or perspectives. -->
 
+All URLs verified to resolve on 2026-06-09. Reddit (r/UCSD), Yelp, ApartmentRatings, and Niche hard-block automated fetching and were excluded; the two cleanly-extractable sources below together span 6 complexes, 4 neighborhoods, and cost/commute/roommate topics.
+
 | # | Source | Type | URL or file path |
 |---|--------|------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+| 1 | VeryApt — Costa Verde Village reviews | Apartment review site | https://www.veryapt.com/ApartmentReview-a25717-costa-verde-village-san-diego |
+| 2 | VeryApt — Nobel Court reviews | Apartment review site | https://www.veryapt.com/ApartmentReview-a5512-nobel-court-san-diego |
+| 3 | VeryApt — Regents La Jolla reviews | Apartment review site | https://www.veryapt.com/ApartmentReview-a5544-regents-la-jolla-san-diego |
+| 4 | VeryApt — La Regencia reviews | Apartment review site | https://www.veryapt.com/ApartmentReview-a5483-la-regencia-san-diego |
+| 5 | VeryApt — La Jolla del Sol reviews | Apartment review site | https://www.veryapt.com/ApartmentReview-a24827-la-jolla-del-sol-san-diego |
+| 6 | VeryApt — Solazzo / Villa La Jolla reviews | Apartment review site | https://www.veryapt.com/ApartmentReview-a5573-solazzo-apartments-homes-san-diego |
+| 7 | VeryApt — La Jolla apartments index (19 complexes) | Apartment review site | https://www.veryapt.com/Apartments-L5628-san-diego-la-jolla |
+| 8 | VeryApt — La Jolla neighborhood guide | Neighborhood guide | https://www.veryapt.com/guides/neighborhood/465-san-diego-la-jolla/ |
+| 9 | VeryApt — University City neighborhood guide | Neighborhood guide | https://www.veryapt.com/guides/neighborhood/507-san-diego-university-city/ |
+| 10 | VeryApt — Mira Mesa neighborhood guide | Neighborhood guide | https://www.veryapt.com/guides/neighborhood/464-san-diego-mira-mesa/ |
+| 11 | VeryApt — Clairemont Mesa neighborhood guide | Neighborhood guide | https://www.veryapt.com/guides/neighborhood/509-san-diego-clairemont-mesa/ |
+| 12 | findmyplace — Best Neighborhoods for UCSD Off-Campus Housing | Unofficial housing guide (blog) | https://findmyplace.co/blog/best-neighborhoods-near-ucsd-for-students/ |
+| 13 | findmyplace — San Diego Student Housing Costs (2026) | Unofficial housing guide (blog) | https://findmyplace.co/blog/san-diego-student-housing-costs-2026/ |
+| 14 | findmyplace — UCSD Off-Campus Housing Timeline | Unofficial housing guide (blog) | https://findmyplace.co/blog/ucsd-off-campus-housing-timeline/ |
 
 ---
 
