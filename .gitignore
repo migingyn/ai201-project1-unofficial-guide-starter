@@ -16,5 +16,8 @@ env/
 chroma_db/
 chroma/
 
+# Raw scraped HTML archive (bulky; reproducible via `python -m src.ingest`)
+documents/raw_html/
+
 # macOS
 .DS_Store

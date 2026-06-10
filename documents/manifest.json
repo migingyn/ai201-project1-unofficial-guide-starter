@@ -1,0 +1,114 @@
+[
+  {
+    "id": "01_costa_verde_village",
+    "name": "Costa Verde Village (UTC) \u2014 resident reviews",
+    "url": "https://www.veryapt.com/ApartmentReview-a25717-costa-verde-village-san-diego",
+    "kind": "review",
+    "clean_path": "documents/clean/01_costa_verde_village.txt",
+    "clean_chars": 3995
+  },
+  {
+    "id": "02_nobel_court",
+    "name": "Nobel Court (UTC) \u2014 resident reviews",
+    "url": "https://www.veryapt.com/ApartmentReview-a5512-nobel-court-san-diego",
+    "kind": "review",
+    "clean_path": "documents/clean/02_nobel_court.txt",
+    "clean_chars": 1912
+  },
+  {
+    "id": "03_regents_la_jolla",
+    "name": "Regents La Jolla \u2014 resident reviews",
+    "url": "https://www.veryapt.com/ApartmentReview-a5544-regents-la-jolla-san-diego",
+    "kind": "review",
+    "clean_path": "documents/clean/03_regents_la_jolla.txt",
+    "clean_chars": 3090
+  },
+  {
+    "id": "04_la_regencia",
+    "name": "La Regencia \u2014 resident reviews",
+    "url": "https://www.veryapt.com/ApartmentReview-a5483-la-regencia-san-diego",
+    "kind": "review",
+    "clean_path": "documents/clean/04_la_regencia.txt",
+    "clean_chars": 2514
+  },
+  {
+    "id": "05_la_jolla_del_sol",
+    "name": "La Jolla del Sol \u2014 resident reviews",
+    "url": "https://www.veryapt.com/ApartmentReview-a24827-la-jolla-del-sol-san-diego",
+    "kind": "review",
+    "clean_path": "documents/clean/05_la_jolla_del_sol.txt",
+    "clean_chars": 496
+  },
+  {
+    "id": "06_solazzo_villa_la_jolla",
+    "name": "Solazzo / Villa La Jolla \u2014 resident reviews",
+    "url": "https://www.veryapt.com/ApartmentReview-a5573-solazzo-apartments-homes-san-diego",
+    "kind": "review",
+    "clean_path": "documents/clean/06_solazzo_villa_la_jolla.txt",
+    "clean_chars": 2503
+  },
+  {
+    "id": "07_la_jolla_apartments_index",
+    "name": "La Jolla / UCSD-area apartments index (19 complexes)",
+    "url": "https://www.veryapt.com/Apartments-L5628-san-diego-la-jolla",
+    "kind": "index",
+    "clean_path": "documents/clean/07_la_jolla_apartments_index.txt",
+    "clean_chars": 701
+  },
+  {
+    "id": "08_la_jolla_guide",
+    "name": "La Jolla neighborhood guide",
+    "url": "https://www.veryapt.com/guides/neighborhood/465-san-diego-la-jolla/",
+    "kind": "guide",
+    "clean_path": "documents/clean/08_la_jolla_guide.txt",
+    "clean_chars": 2216
+  },
+  {
+    "id": "09_university_city_guide",
+    "name": "University City neighborhood guide",
+    "url": "https://www.veryapt.com/guides/neighborhood/507-san-diego-university-city/",
+    "kind": "guide",
+    "clean_path": "documents/clean/09_university_city_guide.txt",
+    "clean_chars": 6961
+  },
+  {
+    "id": "10_mira_mesa_guide",
+    "name": "Mira Mesa neighborhood guide",
+    "url": "https://www.veryapt.com/guides/neighborhood/464-san-diego-mira-mesa/",
+    "kind": "guide",
+    "clean_path": "documents/clean/10_mira_mesa_guide.txt",
+    "clean_chars": 833
+  },
+  {
+    "id": "11_clairemont_mesa_guide",
+    "name": "Clairemont Mesa neighborhood guide",
+    "url": "https://www.veryapt.com/guides/neighborhood/509-san-diego-clairemont-mesa/",
+    "kind": "guide",
+    "clean_path": "documents/clean/11_clairemont_mesa_guide.txt",
+    "clean_chars": 1285
+  },
+  {
+    "id": "12_best_neighborhoods",
+    "name": "findmyplace \u2014 Best Neighborhoods for UCSD Off-Campus Housing",
+    "url": "https://findmyplace.co/blog/best-neighborhoods-near-ucsd-for-students/",
+    "kind": "blog",
+    "clean_path": "documents/clean/12_best_neighborhoods.txt",
+    "clean_chars": 15242
+  },
+  {
+    "id": "13_housing_costs_2026",
+    "name": "findmyplace \u2014 San Diego Student Housing Costs (2026)",
+    "url": "https://findmyplace.co/blog/san-diego-student-housing-costs-2026/",
+    "kind": "blog",
+    "clean_path": "documents/clean/13_housing_costs_2026.txt",
+    "clean_chars": 7703
+  },
+  {
+    "id": "14_housing_timeline",
+    "name": "findmyplace \u2014 UCSD Off-Campus Housing Timeline",
+    "url": "https://findmyplace.co/blog/ucsd-off-campus-housing-timeline/",
+    "kind": "blog",
+    "clean_path": "documents/clean/14_housing_timeline.txt",
+    "clean_chars": 7331
+  }
+]

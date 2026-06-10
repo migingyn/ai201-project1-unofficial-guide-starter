@@ -56,6 +56,8 @@ The overlap is small with roughly 20-30 tokens, but only when the fallback split
 **Reasoning:**
 Since most of my documents are short reviews, the important info is usually packed into a few sentences, so splitting on a full review keeps each opinion together with the complex it's about instead of getting cut off mid-thought. I went with tokens for the fallback cap because the embedding model (all-MiniLM-L6-v2) maxes out at 256 tokens and just truncates anything past that, so ~200 leaves room and only kicks in on the longer findmyplace guides. I kept the overlap small and only on those fallback splits because whole reviews already stand on their own, so overlapping them would just repeat content and make retrieval less sharp.
 
+**Update (Milestone 3):** building it, I added one tweak — the findmyplace blogs are long-form prose, so splitting them by paragraph left tiny fragment chunks like "TL;DR" or the author byline. For the blog docs only I now greedily pack paragraphs up to the 200-token cap so headings bind to their text; reviews and guides still stay one-unit-per-chunk. Final corpus: **117 chunks** across the 14 docs (avg ~102 tokens, max 200, none empty).
+
 ---
 
 ## Retrieval Approach
