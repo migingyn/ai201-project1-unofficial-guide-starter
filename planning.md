@@ -48,10 +48,13 @@ All URLs verified to resolve (HTTP 200) on 2026-06-09. Reddit (r/UCSD), Yelp, Ap
      A review-heavy corpus warrants different chunking than a long FAQ. -->
 
 **Chunk size:**
+The main method for how the document will be split into chunks will be one complete review of a unit with a fall back cap of roughly 200 tokens.
 
 **Overlap:**
+The overlap is small with roughly 20-30 tokens, but only when the fallback splits since whole reviews don't need an overapp as they're self-contained.
 
 **Reasoning:**
+Since most of my documents are short reviews, the important info is usually packed into a few sentences, so splitting on a full review keeps each opinion together with the complex it's about instead of getting cut off mid-thought. I went with tokens for the fallback cap because the embedding model (all-MiniLM-L6-v2) maxes out at 256 tokens and just truncates anything past that, so ~200 leaves room and only kicks in on the longer findmyplace guides. I kept the overlap small and only on those fallback splits because whole reviews already stand on their own, so overlapping them would just repeat content and make retrieval less sharp.
 
 ---
 
@@ -64,10 +67,13 @@ All URLs verified to resolve (HTTP 200) on 2026-06-09. Reddit (r/UCSD), Yelp, Ap
      support, accuracy on domain-specific text, latency? -->
 
 **Embedding model:**
+The embedding model is all-MiniLM-L6-v2 via sentence-transformers.
 
 **Top-k:**
+Top-k of k = 5.
 
 **Production tradeoff reflection:**
+I picked all-MiniLM-L6-v2 because it runs locally with no API key, it's fast, and it's plenty for short English housing reviews. If cost and real users weren't a constraint, the main reason I'd swap it out is domain accuracy — housing reviews are full of slang and synonyms (packed/crowded, loud/thin walls, roaches/bugs), and a stronger model like bge-large-en-v1.5 or OpenAI's text-embedding-3-large would match those paraphrases more reliably so a query like "pest problems" still pulls the right reviews. Multilingual support would only matter if I added non-English sources later (e.g. international-student posts), and context length barely matters here since my chunks are short reviews well under MiniLM's 256-token limit. The tradeoff for any of those upgrades is latency — the bigger local models or an API round-trip are slower than MiniLM — but since I'm only retrieving k=5 over a small corpus, that speed hit wouldn't really be noticeable.
 
 ---
 
@@ -83,8 +89,8 @@ All URLs verified to resolve (HTTP 200) on 2026-06-09. Reddit (r/UCSD), Yelp, Ap
 | 1 | What do residents complain about most at Costa Verde Village? | Recurring roaches/pests, thin walls and noise, a parking shortage, and reports of car break-ins/vandalism — overall a low ~5/10 rating despite the convenient UTC location. |
 | 2 | How does median 1-bedroom rent in University City compare to Mira Mesa? | University City is more expensive (~$2,100/mo for a 1BR) than Mira Mesa (~$1,800/mo); Mira Mesa is the budget tradeoff but is more car-dependent and farther from campus. |
 | 3 | How crowded do students say Regents La Jolla units get? | Students report units packed with 4–8 people, alongside rising rents — though it's gated and only about a 10-minute bike to campus. |
-| 4 | Which neighborhood should a budget-conscious UCSD student consider, and what's the tradeoff? | Mira Mesa (or Clairemont) — lower rent than La Jolla/UTC, but you'll need a car and accept a longer commute to campus. |
-| 5 | Is La Regencia a good cheap option near campus, and what are the downsides? | It's one of the cheapest La Jolla student complexes with decent value/maintenance, but downsides include nightmare parking, nighttime noise, older interiors, and some safety concerns. |
+| 4 | According to the guides, which neighborhood is the budget option for UCSD students, and what commute tradeoff do they cite? | Mira Mesa (and Clairemont) — lower rent than La Jolla/UTC, but it's more car-dependent and a longer commute to campus. |
+| 5 | What downsides do reviewers report about La Regencia despite its low rent? | Nightmare parking, nighttime noise, older interiors, and safety concerns. |
 
 ---
 
@@ -110,6 +116,36 @@ All URLs verified to resolve (HTTP 200) on 2026-06-09. Reddit (r/UCSD), Yelp, Ap
      You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
      You'll use this diagram as context when prompting AI tools to implement each stage. -->
 
+```mermaid
+flowchart TD
+    A[("14 web sources<br/>VeryApt reviews + findmyplace guides")] --> B
+
+    subgraph INGEST["1 · Document Ingestion"]
+        B["Fetch + clean text<br/>requests / BeautifulSoup<br/>strip nav, ads, boilerplate"]
+    end
+
+    subgraph CHUNK["2 · Chunking"]
+        C["Split on whole-review boundary<br/>~200-token fallback cap<br/>20–30 token overlap on splits only"]
+    end
+
+    subgraph EMBED["3 · Embedding + Vector Store"]
+        D["Embed chunks<br/>all-MiniLM-L6-v2<br/>(sentence-transformers, 384-dim)"]
+        E[("ChromaDB<br/>vectors + source metadata")]
+    end
+
+    subgraph RETRIEVE["4 · Retrieval"]
+        F["Embed query → semantic search<br/>top-k = 5 by cosine similarity"]
+    end
+
+    subgraph GEN["5 · Generation"]
+        G["Grounded answer + source attribution<br/>Groq llama-3.3-70b-versatile<br/>answer only from retrieved chunks"]
+    end
+
+    B --> C --> D --> E
+    Q(["User query"]) --> F
+    E --> F --> G --> H(["Answer with cited sources"])
+```
+
 ---
 
 ## AI Tool Plan
@@ -126,6 +162,21 @@ All URLs verified to resolve (HTTP 200) on 2026-06-09. Reddit (r/UCSD), Yelp, Ap
 
 **Milestone 3 — Ingestion and chunking:**
 
+- *AI tool:* Claude (Claude Code).
+- *Input I'll give it:* my Documents table (the 14 source URLs) plus my Chunking Strategy section, and tell it the pages are HTML from VeryApt and findmyplace (not PDFs).
+- *What I expect it to produce:* an ingestion script that fetches each URL, strips the nav/ads/boilerplate down to clean review/guide text, and a `chunk_text()` that splits on whole-review boundaries with my ~200-token fallback cap and 20–30 token overlap only on the fallback splits.
+- *How I'll verify it:* spot-check a few saved text files to confirm the junk is gone, and print a handful of chunks to make sure whole reviews stay intact and nothing got cut mid-thought or blew past the token cap.
+
 **Milestone 4 — Embedding and retrieval:**
 
+- *AI tool:* Claude (Claude Code).
+- *Input I'll give it:* my Retrieval Approach section — embedding model `all-MiniLM-L6-v2` via sentence-transformers, ChromaDB as the store, top-k = 5 — and tell it to keep each chunk's source (URL/complex name) as metadata for attribution.
+- *What I expect it to produce:* code that embeds every chunk, stores vectors + source metadata in ChromaDB, and a `search(query)` that embeds the query and returns the top-5 chunks by cosine similarity with their sources.
+- *How I'll verify it:* run my 5 eval questions and eyeball whether the retrieved chunks are actually about the right complex/neighborhood before I add any generation, since most RAG failures are retrieval failures.
+
 **Milestone 5 — Generation and interface:**
+
+- *AI tool:* Claude (Claude Code).
+- *Input I'll give it:* the Grounded Response requirement (answer only from retrieved chunks + cite sources) and tell it to use Groq `llama-3.3-70b-versatile` with the top-5 chunks from Milestone 4 as context.
+- *What I expect it to produce:* a prompt that forces the model to answer only from the retrieved chunks and say when it doesn't know, the answer with its cited sources, and a simple CLI/notebook interface to type a query and see the result.
+- *How I'll verify it:* run my 5 eval questions, check each answer is grounded in the cited chunks (no made-up facts), and deliberately ask the thin Pacific Beach question to confirm it refuses instead of hallucinating.
